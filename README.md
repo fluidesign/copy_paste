@@ -2,7 +2,7 @@
 manager for Windows.
 
 ## The idea behind the project
-Implement a cache manager which will allow me to copy and paste cached data.
+Implement a cache manager which will allow me to copy and paste cached data. Clipboard copy/paste will be implemented using pyperclip.
 The cache manager uses a secure DB [really?]
 
 ### Dev design [Currently implementing]  
@@ -19,4 +19,4 @@ The cache manager uses a secure DB [really?]
 		1.3.1	Short description about app and author.  
 2.	DB:  
 	2.1	key-value secure DB [pickleDB?]  
-3.	Keyboard mapping0  
+3.	Keyboard mapping

@@ -3,6 +3,9 @@ import pyperclip
 import keyRead
 import config_manager
 import appGui
+import clipboard_manager
+import logger
+import logging
 
 _running = True
 
@@ -19,19 +22,28 @@ def main():
     open_clipboard_list_keystroke = config_manager.get_config_value('app-control','open_clipboard_list_keystroke')
     save_clipboard_keystroke = config_manager.get_config_value('app-control','save_clipboard_keystroke')
 
+    try:
+        logger = logging.getLogger('global_logger')
+    except logging.NullHandler as error:
+        print ("We are having an issue with the logging module : {err}".format(err=error))
+
+    logger.debug("We are in the {fun} about to start the main loop".format(fun=__name__))
     while _running:
         keystroke = determine_keystroke()
-        print(open_clipboard_list_keystroke)
         if keystroke == safe_close_keystroke:
-            print("Safe close software captured, closing...")
+            logger.info("Safe close software captured, closing...")
             _running = False
         elif keystroke == open_clipboard_list_keystroke:
-            print("Open clipboard history")
-            _appGui = appGui.AppGui()
-            _appGui.mainloop()
+            logger.debug("Open clipboard history")
+            clipboard_manager.retreive_values_from_db()
+            #_appGui = appGui.AppGui()
+            #if _appGui.counter == 1 :
+            #    _appGui.mainloop()
+            #else:
+            #    print("Only single instance is allowed")
         elif keystroke == save_clipboard_keystroke:
-            print("Clipboard saved")
+            clipboard_manager.catch_clipboard()
         else:
-            print("key captured " + keystroke)
-    
+            logger.debug("key captured " + keystroke)
+
 main()

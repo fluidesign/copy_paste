@@ -28,9 +28,22 @@ def get_config_value(section, key):
 def create_config(config):
     config['app-control'] = {}
     config['app-control'] = { 'safe_close_keystroke': 'ctrl-alt-a', 'number_of_clipboard_values_to_save': '10',
-    'open_clipboard_list_keystroke': 'ctrl-z', 'save_clipboard_keystroke': 'ctrl-x'}
+    'open_clipboard_list_keystroke': 'ctrl-z', 'save_clipboard_keystroke': 'ctrl-c'}
     with open(config_file_name, 'w') as configfile:
         config.write(configfile)
+
+
+def modify_config(section, key,value):
+    global config_file_name
+    try:
+        parser = configparser.SafeConfigParser
+        parser.set(str(section), str(key), str(value))
+        with open(config_file_name, 'wb') as configfile:
+            parser.write(configfile)
+    except (configparser.NoSectionError, TypeError) as error:
+        print("error" + error)
+        return None
+
 
 
 def verify_config_exist():

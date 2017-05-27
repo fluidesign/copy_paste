@@ -13,6 +13,8 @@ LARGE_FONT = ("Verdana", 12)
 
 class AppGui(tk.Tk):
 
+    instances_counter = 0
+
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
         container = tk.Frame(self)
@@ -33,6 +35,8 @@ class AppGui(tk.Tk):
             frame.grid(row=0, column=0, sticky="nsew")
 
         self.show_frame(MainPage)
+        AppGui.instances_counter += 1
+        self.counter = AppGui.instances_counter
 
     def show_frame(self, cont):
 

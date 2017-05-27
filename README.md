@@ -18,5 +18,8 @@ The cache manager uses a secure DB [really?]
 	1.3	About menu:  
 		1.3.1	Short description about app and author.  
 2.	DB:  
-	2.1	key-value secure DB [pickleDB?]  
+	2.1	key-value secure DB [sqlite3]
 3.	Keyboard mapping
+    3.1 Manually mapped keys using msvcrt module
+4. Clipborad manager:
+    4.1 Copy/Paste using pyperclip
